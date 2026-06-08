@@ -1,0 +1,193 @@
+* {
+    /* Faz padding e borda entrarem no tamanho total dos elementos */
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+    background: #f3f5f7;
+}
+
+.topo {
+    padding: 28px 18px;
+    text-align: center;
+    color: white;
+    background: #1f6f8b;
+}
+
+.topo h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+}
+
+.topo p {
+    margin: 0;
+}
+
+.container {
+    /* Divide a tela em duas colunas: produtos e carrinho */
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 20px;
+    width: min(1100px, 100%);
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.painel {
+    padding: 18px;
+    border: 1px solid #d8dee4;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.titulo-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+label {
+    font-weight: bold;
+}
+
+select,
+input {
+    margin-left: 6px;
+    padding: 8px;
+    border: 1px solid #c5cbd3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.lista-produtos {
+    /* Cria cards responsivos para a lista de produtos */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+}
+
+.produto,
+.item-carrinho {
+    /* Mesmo estilo para card de produto e item do carrinho */
+    border: 1px solid #dde3ea;
+    border-radius: 8px;
+    padding: 14px;
+    background: #fbfcfd;
+}
+
+.produto h3,
+.item-carrinho h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.preco,
+.subtotal {
+    margin: 8px 0;
+    font-weight: bold;
+    color: #1f6f8b;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 6px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background: #238636;
+    transition: 0.2s;
+}
+
+button:hover {
+    filter: brightness(0.92);
+}
+
+.botao-remover {
+    background: #d1242f;
+}
+
+.botao-secundario {
+    background: #57606a;
+}
+
+.botoes-quantidade {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.botoes-quantidade button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+}
+
+.mensagem-vazio {
+    margin: 0;
+    padding: 14px;
+    border-radius: 8px;
+    color: #57606a;
+    background: #f6f8fa;
+}
+
+.desconto-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.desconto-area input {
+    width: 90px;
+}
+
+.total-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #d8dee4;
+    font-size: 22px;
+}
+
+@media (max-width: 820px) {
+    /* Em telas menores, produtos e carrinho ficam um embaixo do outro */
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-linha {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    select,
+    input {
+        margin-left: 0;
+        margin-top: 6px;
+        width: 100%;
+    }
+
+    .desconto-area {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .desconto-area input {
+        width: 100%;
+    }
+}

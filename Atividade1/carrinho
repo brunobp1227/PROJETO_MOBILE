@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Catálogo</h1>
+
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 (<span id="cart-count">0</span>)
+    </button>
+  </header>
+  <!-- FILTROS -->
+
+<section class="filters">
+
+  <div class="filter-group">
+
+    <label for="priceFilter">
+      Faixa de preço
+    </label>
+
+    <select id="priceFilter">
+
+      <option value="">
+        Todos os preços
+      </option>
+
+      <option value="200">
+        Produtos até R$ 200
+      </option>
+
+      <option value="300">
+        Produtos até R$ 300
+      </option>
+
+    </select>
+  </div>
+
+  <div class="filter-group">
+
+    <label for="categoryFilter">
+      Categoria
+    </label>
+
+    <select id="categoryFilter">
+
+      <option value="">
+        Todas as categorias
+      </option>
+
+      <option value="calcados">
+        Calçados
+      </option>
+
+      <option value="relogios">
+        Relógios
+      </option>
+
+      <option value="roupas">
+        Roupas
+      </option>
+
+    </select>
+  </div>
+
+  <button class="filter-btn" onclick="setFilter()">
+    Filtrar
+  </button>
+  <button class="filter-btn" onclick="clearFilters()">
+    Limpar filtros
+  </button>
+
+</section>
+  <main class="catalog">
+
+    <!-- Produto 1 -->
+    <div class="product-card" data-price="249.90" data-category="calcados">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="Tênis">
+
+      <div class="product-info">
+        <h2 class="product-title">Tênis Esportivo</h2>
+
+        <p class="product-description">
+          Confortável e moderno para o dia a dia.
+        </p>
+
+        <div class="product-footer">
+          <span class="price">R$ 249,90</span>
+
+          <button class="add-btn"
+            onclick="addToCart('Tênis Esportivo', 249.90)">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produto 2 -->
+    <div class="product-card" data-price="399.90" data-category="relogios">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop" alt="Relógio">
+
+      <div class="product-info">
+        <h2 class="product-title">Relógio Premium</h2>
+
+        <p class="product-description">
+          Elegância e sofisticação em um só produto.
+        </p>
+
+        <div class="product-footer">
+          <span class="price">R$ 399,90</span>
+
+          <button class="add-btn"
+            onclick="addToCart('Relógio Premium', 399.90)">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produto 3 -->
+    <div class="product-card" data-price="189.90" data-category="roupas">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" alt="Jaqueta">
+
+      <div class="product-info">
+        <h2 class="product-title">Jaqueta Casual</h2>
+
+        <p class="product-description">
+          Estilo urbano com acabamento premium.
+        </p>
+
+        <div class="product-footer">
+          <span class="price">R$ 189,90</span>
+
+          <button class="add-btn"
+            onclick="addToCart('Jaqueta Casual', 189.90)">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Carrinho -->
+  <aside class="cart-sidebar" id="cartSidebar">
+
+    <div class="cart-header">
+      <h2>Seu Carrinho</h2>
+
+      <button class="close-cart" onclick="toggleCart()">
+        ✖
+      </button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <p>Seu carrinho está vazio.</p>
+    </div>
+
+    <div class="cart-footer">
+        <div class="total">
+            Total: R$ <span id="cartTotal">0.00</span>
+        </div>
+        <div class="cart-actions">
+
+            <button class="checkout-btn">
+            Finalizar Compra
+            </button>
+
+            <button class="cancel-btn" onclick="removerItems()">
+            Remover itens
+            </button>
+        </div>
+    </div>
+  </aside>
+</body>
+</html>
+// Função para atualizar carrinho toda vez que a página for carregada
+window.addEventListener('DOMContentLoaded', () => {
+    let array = JSON.parse(localStorage.getItem("lista")) || [];
+    updateCarrinho(array);
+});
+
+function addToCart(name, price){
+
+    let carrinho =
+        JSON.parse(localStorage.getItem("lista")) || []; // Pega valor salvo no localstorage, caso esteja vazio cria uma lista vazia
+
+    // Procura produto existente
+    let produtoExistente =
+        carrinho.find(item => item.nome === name);
+
+    if(produtoExistente){
+
+        produtoExistente.qtd += 1;
+
+    } else {
+
+        let produto = {
+            nome: name,
+            preco: price,
+            qtd: 1
+        };
+
+        carrinho.push(produto);
+    }
+
+    localStorage.setItem(
+        "lista",
+        JSON.stringify(carrinho)
+    ); // Atualiza valor da lista
+
+    updateCarrinho(carrinho); // Chama a função para atualizar o carrinho visualmente
+}
+
+function updateCarrinho(lista){
+
+    const cartItems =
+        document.getElementById('cartItems'); // Elemento HTML em que entrará todos os itens do carrinho
+
+    const cartCount =
+        document.getElementById('cart-count'); // Elemento HTML que representa a contagem de itens no carrinho
+
+    const cartTotal =
+        document.getElementById('cartTotal'); // Elemento HTML que exibirá o valor total
+
+    cartItems.innerHTML = '';
+
+    let total = 0;
+    let quantidadeTotal = 0;
+
+    lista.forEach((item, index) => {
+
+        let subtotal = item.preco * item.qtd; // Total de cada produto, considerando a quantidade adiconado no carrinho
+
+        total += subtotal; // Total de todo o carrinho
+
+        quantidadeTotal += item.qtd; // Quantidade de cada produto salvo no carrinho
+
+        cartItems.innerHTML += `
+        <div class="cart-item">
+
+            <div class="cart-item-info">
+
+                <span>
+                    ${item.nome}
+                    (${item.qtd}x)
+                </span>
+
+                <strong>
+                    R$ ${subtotal.toFixed(2)}
+                </strong>
+
+            </div>
+
+            <button class="cancel-btn"
+                onclick="removeItem(${index})">
+                Remover
+            </button>
+
+        </div>`;
+    });
+
+    if(lista.length === 0){
+        cartItems.innerHTML =
+            '<p>Seu carrinho está vazio.</p>';
+    } // Se a lista estiver vazia, exibirá esta mensagem
+
+    cartCount.innerText = quantidadeTotal; // Contador de produtos do carrinho
+
+    cartTotal.innerText =
+        total.toFixed(2); // Valor total do carrinho
+}
+// Função para abrir o carrinho
+function toggleCart(){
+      document.getElementById('cartSidebar')
+        .classList.toggle('open');
+}
+
+function removeItem(index){
+
+    let carrinho =
+        JSON.parse(localStorage.getItem("lista")) || [];
+
+    // Se tiver mais de um do mesmo produto no carrinho, removerá apenas um, caso tenha um apenas, será excluido da lista
+    if(carrinho[index].qtd > 1){
+
+        carrinho[index].qtd -= 1;
+
+    } else {
+
+        carrinho.splice(index, 1);
+    }
+
+    localStorage.setItem(
+        "lista",
+        JSON.stringify(carrinho)
+    ); // Atualiza a lista no localstorage
+
+    updateCarrinho(carrinho); // Chama a função para atualizar o carrinho visualmente
+}
+function removerItems(){
+    localStorage.removeItem("lista"); // Remove a lista salva no localstorage
+
+    let carrinho = []; // Cria uma lista vazia
+
+    updateCarrinho(carrinho) // Atualiza o carrinho visualmente, agora vazio
+}
+
+function setFilter(){
+    const priceSelect = document.getElementById('priceFilter').value; // Valor selecionado no filtro de preço
+    const categorySelect = document.getElementById('categoryFilter').value; // Valor selecionado no filtro de categoria
+
+    // Se os dois estiverem vazios, retorna o alert apenas
+    if(!priceSelect && !categorySelect){
+        alert("Selecione uma das opções do filtro");
+        return;
+    } 
+
+    let products = document.querySelectorAll(".product-card"); // Pega todos os elementos registrados no catálogo
+
+    products.forEach(produto => {
+        const preco = parseFloat(produto.dataset.price); // Valor do dataset.price 
+
+        const categoria = produto.dataset.category; // Valor do dataset.category
+
+        let mostar = true; // Variável para definir se mostra ou não o produto
+
+        // Se o priceSelect foi selecionado, cria a verificação
+        if(priceSelect){
+            if(parseFloat(priceSelect) < preco){
+                mostar = false;
+            }
+        }
+
+        // Se o categorySelect foi selecionado, cria a verificação
+        if(categorySelect){
+            if(categoria !== categorySelect){
+                mostar = false;
+            }
+        }
+
+        produto.style.display = mostar ? 'block' : 'none'; // Define se irá mostrar o produto conforme o valor da variável de verificação
+    })
+}
+
+function clearFilters(){
+    let products = document.querySelectorAll('.product-card');
+
+    products.forEach(produto => {
+        produto.style.display = 'block'; // Mostra todos os itens
+
+        const priceSelect = document.getElementById('priceFilter');
+        const categorySelect = document.getElementById('categoryFilter');
+
+        // Reinicia o valor dos select
+        priceSelect.value = '';
+        categorySelect.value = '';
+    })
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f4f6f9;
+  color:#333;
+}
+
+header{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+header h1{
+  font-size:28px;
+}
+
+.cart-btn{
+  background:white;
+  color:#4f46e5;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cart-btn:hover{
+  transform:scale(1.05);
+}
+
+.catalog{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  padding:40px;
+}
+
+.product-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
+  max-width: 500px;
+}
+
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.12);
+}
+
+.product-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-title{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.product-description{
+  font-size:14px;
+  color:#666;
+  margin-bottom:15px;
+}
+
+.product-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.price{
+  font-size:22px;
+  font-weight:bold;
+  color:#4f46e5;
+}
+
+.add-btn{
+  background:#4f46e5;
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.add-btn:hover{
+  background:#372fcf;
+}
+
+/* Carrinho */
+
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-400px;
+  width:350px;
+  height:100%;
+  background:white;
+  box-shadow:-5px 0 15px rgba(0,0,0,0.15);
+  transition:0.4s;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+}
+
+.cart-sidebar.open{
+  right:0;
+}
+
+.cart-header{
+  background:#4f46e5;
+  color:white;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.close-cart{
+  background:none;
+  border:none;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.cart-items{
+  flex:1;
+  overflow-y:auto;
+  padding:20px;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  border-bottom:1px solid #ddd;
+  padding-bottom:10px;
+  gap:10px;
+}
+
+.cart-item-info{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.cart-item-price{
+  color:#4f46e5;
+  font-weight:bold;
+}
+
+.cart-actions{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  margin-top:15px;
+}
+
+.checkout-btn,
+.cancel-btn{
+  flex:1;
+  border:none;
+  padding:14px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.checkout-btn{
+  background:#22c55e;
+  color:white;
+}
+
+.checkout-btn:hover{
+  background:#16a34a;
+}
+
+/* REMOVER */
+
+.cancel-btn{
+  background:#ef4444;
+  color:white;
+}
+
+.cancel-btn:hover{
+  background:#dc2626;
+}
+/* FILTROS */
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:end;
+  gap:20px;
+  padding:25px 40px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.filter-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.filter-group label{
+  font-size:14px;
+  font-weight:bold;
+  color:#444;
+}
+
+.filter-group select{
+  min-width:220px;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  transition:0.3s;
+  background:#fff;
+}
+
+.filter-group select:focus{
+  border-color:#4f46e5;
+  box-shadow:0 0 0 4px rgba(79,70,229,0.15);
+}
+
+.filter-btn{
+  background:#4f46e5;
+  color:white;
+  border:none;
+  padding:12px 24px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.filter-btn:hover{
+  background:#372fcf;
+  transform:translateY(-2px);
+}
+
+@media(max-width:700px){
+
+  .filters{
+    padding:20px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .filter-group select{
+    width:100%;
+  }
+
+  .filter-btn{
+    width:100%;
+  }
+
+}
+@media(max-width:500px){
+
+  .cart-sidebar{
+    width:100%;
+  }
+
+  header{
+    padding:20px;
+  }
+
+}

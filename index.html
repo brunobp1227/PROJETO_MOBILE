@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <div id="conteiner" class="conteiner">
+        <header>
+            <h1>Calculadora</h1>
+        </header>
+        <main>
+            <article>
+                <div id="subConteiner" class="subConteiner">
+                    <form action="" id="form" class="form">
+                        <input type="text" id="visor" readonly>
+                        <label for="num">Digite seu número:</label>
+                        <input type="number" name="nome" id="num1">
+
+                    </form>
+                    <form>
+                        <h2>Operações</h2>
+                        <div class="checkBox" id="checkBox">
+                            <select name="operacoes" id="operacoes">
+
+                                <option value="dobro" id="dobro">Dobro</option>
+
+                                <option value="triplo" id="triplo">Triplo</option>
+
+                                <option value="quadruplo" id="quadruplo">Quádruplo</option>
+
+                                <option value="quintuplo" id="quintuplo">Quíntuplo</option>
+
+                                <option value="sextuplo" id="sextuplo">Sêxtuplo</option>
+
+                                <option value="quadrado" id="quadrado">Quadrado</option>
+
+                                <option value="cubo" id="cubo">Cubo</option>
+
+                                <option value="quartaPotencia" id="quartaPotencia">Quarta Potência</option>
+
+                                <option value="quintaPotencia" id="quintaPotencia">Quinta Potência</option>
+
+                                <option value="sextaPotencia" id="sextaPotencia">Sexta Potência</option>
+
+                                <option value="bhaskara" id="bhaskara">Bhaskara</option>
+
+                                <option value="mediaAritmetica" id="mediaAritmetica">
+                                    Média Aritmética (entre 4 números)
+                                </option>
+
+                                <option value="imparPar" id="imparPar">
+                                    Verificar se é ímpar ou par
+                                </option>
+                            </select>
+                            <div id="inputsExtras">
+
+                            </div>
+                            <button type="button" onclick="enviarNum()" id="btn1">Enviar</button>
+                        </div>
+                    </form>
+                    <p id="resultado"></p>
+                </div>
+            </article>
+        </main>
+    </div>
+    <script>
+
+        let btn1 = document.getElementById("btn1");
+        let select = document.getElementById("operacoes");
+
+        let inputsExtras = document.getElementById("inputsExtras");
+
+        function enviarNum() {
+
+            let num1 = Number(document.getElementById("num1").value);
+
+            let inputsExtras = document.getElementById("inputsExtras");
+            let resultado = document.getElementById("visor");
+
+            if (select.value === "dobro") {
+                resultado.value = num1 * 2;
+            }
+            else if (select.value === "triplo") {
+                resultado.value = num1 * 3;
+            }
+            else if (select.value === "quadruplo") {
+                resultado.value = num1 * 4;
+            }
+            else if (select.value === "quintuplo") {
+                resultado.value = num1 * 5;
+            }
+            else if (select.value === "sextuplo") {
+                resultado.value = num1 * 6;
+            }
+            else if (select.value === "quadrado") {
+                resultado.value = num1 ** 2;
+            }
+            else if (select.value === "cubo") {
+                resultado.value = num1 ** 3;
+            }
+            else if (select.value === "quartaPotencia") {
+                resultado.value = num1 ** 4;
+            }
+            else if (select.value === "quintaPotencia") {
+                resultado.value = num1 ** 5;
+            }
+            else if (select.value === "sextaPotencia") {
+                resultado.value = num1 ** 6;
+            }
+            else if (select.value === "bhaskara") {
+
+                let valorB = Number(document.getElementById("valorB").value);
+
+                let valorC = Number(document.getElementById("valorC").value);
+
+                if (num1 === 0){
+                    resultado.value = "O valor de A não pode ser zero";
+                    return;
+                }
+
+                let delta = valorB ** 2 - 4 * num1 * valorC;
+
+                if (delta < 0) {
+                    resultado.value = "Não existem raízes reais";
+                }
+                else if (delta === 0) {
+                    let x = -valorB / (2 * num1);
+                    resultado.value = x;
+                }
+                else {
+                    let x1 = (-valorB + Math.sqrt(delta)) / (2 * num1);
+                    let x2 = (-valorB - Math.sqrt(delta)) / (2 * num1);
+                    resultado.value = `x1 = ${x1}, x2 = ${x2}`;
+                }
+            }
+            else if (select.value === "mediaAritmetica") {
+                let valorB = Number(document.getElementById("valorB").value);
+                let valorC = Number(document.getElementById("valorC").value);
+                let valorD = Number(document.getElementById("valorD").value);
+
+                let media = (num1 + valorB + valorC + valorD) / 4;
+
+                resultado.value = media;
+            }
+            else if (select.value === "imparPar") {
+                if (num1 % 2 === 0) {
+                    resultado.value = "Par";
+                }
+                else {
+                    resultado.value = "Ímpar";
+                }
+            }
+        }
+
+        select.addEventListener("change", function () {
+            let operacao = select.value;
+            inputsExtras.innerHTML = "";
+
+            if (operacao === "bhaskara") {
+                inputsExtras.innerHTML = `
+                <div>
+                    <label>B:</label>
+                    <input type="number" id="valorB">
+                </div>
+                
+                <div>
+                    <label>C:</label>
+                    <input type="number" id="valorC">
+                </div>`;
+            }
+            else if (operacao === "mediaAritmetica") {
+                inputsExtras.innerHTML = `                
+                <div>
+                    <label>B:</label>
+                    <input type="number" id="valorB">
+                </div>
+                
+                <div>
+                    <label>C:</label>
+                    <input type="number" id="valorC">
+                </div>
+                
+                <div>
+                    <label>D:</label>
+                    <input type="number" id="valorD">    
+                </div>`;
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

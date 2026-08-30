@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <div id="conteiner" class="conteiner">
+        <header>
+            <h1>Calculadora</h1>
+        </header>
+        <main>
+            <article>
+                <div id="subConteiner" class="subConteiner">
+                    <form action="" id="form" class="form">
+                        <input type="text" id="visor" readonly>
+                        <label for="num">Digite seu número:</label>
+                        <input type="number" name="nome" id="num1">
+                        <button type="button" onclick="enviarNum()" id="btn1">Enviar</button>
+                    </form>
+                    <form>
+                        <h2>Operações</h2>
+                        <div class="checkBox" id="checkBox"> 
+                            <label>
+                                <input type="radio" name="operacoes" value="dobro" id="dobro">Dobro
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="triplo" id="triplo">Triplo
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="quadruplo" id="quadruplo">Quádruplo
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="quintuplo" id="quintuplo">Quíntuplo
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="sextuplo" id="sextuplo">Sêxtuplo
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes"  value="quadrado" id="quadrado">Quadrado
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="cubo" id="cubo">Cubo
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="quartaPotencia" id="quartaPotencia">Quarta Potência
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="quintaPotencia" id="quintaPotencia">Quinta Potência
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="sextaPotencia" id="sextaPotencia">Sexta Potência
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="bhaskara" id="bhaskara">Bhaskara
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="mediaAritmetica" id="mediaAritmetica">Média Aritmética (entre 4 números)
+                            </label>
+                            <label>
+                                <input type="radio" name="operacoes" value="imparPar" id="imparPar">Verificar se é ímpar ou par
+                            </label>
+                        </div>
+                    </form>
+                    <p id="resultado"></p>
+                </div>
+            </article>
+        </main>
+    </div>
+    <script>
+
+        let btn1 = document.getElementById("btn1");
+
+        let numeroAtual = num1.value;
+        let numeroAnterior = "";
+        let operacao = "";
+
+        function adicionarNumero(num) {
+            numeroAtual += num;
+            document.getElementById("visor").value = numeroAtual;
+        }
+
+        function enviarNum() {
+            let num1 = document.getElementById("num1").value;
+        }
+
+    </script>
+</body>
+
+</html>

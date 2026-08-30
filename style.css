@@ -1,0 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: rgba(240, 240, 240, 0.155);
+}
+
+.conteiner {
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 9px rgba(0, 0, 0, 0.125);
+}
+
+header {
+    font-size: 10px;
+    background-color: rgba(74, 141, 205, 0.567);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 5px;
+}
+
+.tabela {
+    display: flex;
+    gap: 60px;
+    
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+}
+
+.coluna span, input {
+    margin-right: 8px;
+}
+
+.coluna label, span {
+    margin: 5px 0px;
+}
+
+.coluna h1 {
+    margin-left: 5px;   
+    margin: 10px 0px;
+    font-size: 19px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+    padding: 5px 10px;
+    background-color: rgba(203, 203, 203, 0.227);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#qntd input{
+    width: 60px;
+}
+
+.grupoParcelas {
+    display: flex;
+    gap: 15px;
+    border-radius: 10px;
+    border: none;
+}
+
+.grupoParcelas option{
+    border-radius: 10px;
+    border: none;
+}
+
+#total {
+    margin-top: 15px;
+    font-size: 18px;
+}
+

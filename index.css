@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(241, 241, 241);
+    color: white;
+}
+
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.367);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.277);
+    width: 340px;
+}
+
+header {
+    margin-bottom: 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.checkBox {
+    display: flex;
+    flex-direction: column;
+}
+
+#num1,
+#visor,
+#operacoes,
+#inputsExtras {
+    width: 100%;
+}
+
+#num1 {
+    height: 25px;
+    margin-bottom: 10px;    
+    border-radius: 5px;
+    border: none;
+}
+
+#visor {
+    height: 25px;    
+    border-radius: 5px;
+    border: none;
+}
+
+#operacoes {
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+#inputsExtras {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#inputsExtras div {
+    flex: 1;
+}
+
+#inputsExtras input {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: rgba(54, 54, 54, 0.853);
+}
+
+button:hover {
+    background-color: rgba(54, 54, 54, 0.853);
+    color: white;
+}

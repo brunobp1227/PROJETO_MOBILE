@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Controle de vendas</title>
+</head>
+
+<body>
+    <div class="conteiner" id="conteiner">
+        <header>
+            <h1>Controle de vendas</h1>
+        </header>
+        <div class="subConteiner" id="subConteiner">
+            <main>
+                <article>
+                    <form>
+                        <div class="tabela">
+                            <div class="coluna" id="coluna1">
+                                <h1>Produtos:</h1>
+                                <label>
+                                    <input type="checkBox" id="prt1" onchange="calcularTotal()">Camiseta Regata
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt2" onchange="calcularTotal()">Camisa Social
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt3" onchange="calcularTotal()">Blusa
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt4" onchange="calcularTotal()">Pullover
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt5" onchange="calcularTotal()">Sapato
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt6" onchange="calcularTotal()">Calça
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt7" onchange="calcularTotal()">Meias
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt8" onchange="calcularTotal()">Luvas
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt9" onchange="calcularTotal()">Jaqueta
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt10" onchange="calcularTotal()">Bermuda
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt11" onchange="calcularTotal()">Chinelo
+                                </label>
+                                <label>
+                                    <input type="checkBox" id="prt12" onchange="calcularTotal()">Boné
+                                </label>
+                            </div>
+                            <div class="coluna">
+                                <h1>Preço(em R$):</h1>
+                                <span class="preco" id="prt01">19.90</span>
+                                <span class="preco" id="prt02">59.90</span>
+                                <span class="preco" id="prt03">119.90</span>
+                                <span class="preco" id="prt04">39.90</span>
+                                <span class="preco" id="prt05">99.90</span>
+                                <span class="preco" id="prt06">38.90</span>
+                                <span class="preco" id="prt07">9.90</span>
+                                <span class="preco" id="prt08">24.90</span>
+                                <span class="preco" id="prt09">329.90</span>
+                                <span class="preco" id="prt010">69.90</span>
+                                <span class="preco" id="prt011">14.90</span>
+                                <span class="preco" id="prt012">6.90</span>
+
+                            </div>
+                            <div class="coluna" id="qntd">
+                                <h1>Quantidade:</h1>
+                                <label>
+                                    <input type="number" id="qt1" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt2" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt3" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt4" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt5" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt6" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt7" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt8" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt9" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt10" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt11" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                                <label>
+                                    <input type="number" id="qt12" min="0" placeholder="0" onchange="calcularTotal()">
+                                </label>
+                            </div>
+                            <div class="coluna" id="pagamento">
+                                <h1>Forma de Pagamento:</h1>
+                                <label>
+                                    <input type="radio" name="pagamento" id="aVista" onchange="calcularTotal()">À Vista
+                                </label>
+                                <label>
+                                    <input type="radio" name="pagamento" id="aPrazo" onchange="calcularTotal()">À Prazo
+                                </label>
+                                <div class="grupoParcelas" id="grupoParcelas">
+                                    <h4>Quantidade de Parcelas:</h4>
+                                    <select name="parcelas" id="parcelas" onchange="calcularTotal()">
+                                        <option value="">Escolha</option>
+                                        <option value="2" id="duas">2</option>
+                                        <option value="3" id="tres">3</option>
+                                        <option value="4" id="quatro">4</option>
+                                        <option value="5" id="cinco">5</option>
+                                    </select>
+                                </div>
+                                <p id="total"></p>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </main>
+        </div>
+    </div>
+    <script>
+        let produtos = document.getElementById("coluna1");
+        let quantidade = document.getElementById("qntd");
+        let pagamento = document.getElementById("pagamento");
+       
+        let resultado = document.getElementById("total");
+
+        function calcularTotal() {
+            let total = 0;
+            let valorParcela = 0;
+
+            if (document.getElementById("prt1").checked) {
+                total += 19.90 * Number(document.getElementById("qt1").value);
+
+
+
+            }
+            if ((document.getElementById("prt2").checked)) {
+                total += 59.90 * Number(document.getElementById("qt2").value);
+
+            }
+
+            if ((document.getElementById("prt3").checked)) {
+
+               total += 119.90 * Number(document.getElementById("qt3").value);
+               
+            }
+
+            if ((document.getElementById("prt4").checked)) {
+
+                total += 39.90 * Number(document.getElementById("qt4").value);
+
+            }
+
+            if ((document.getElementById("prt5").checked)) {
+
+                total += 99.90 * Number(document.getElementById("qt5").value);
+
+            }
+
+            if ((document.getElementById("prt6").checked)) {
+
+                total += 38.90 * Number(document.getElementById("qt6").value);
+
+            }
+
+            if ((document.getElementById("prt7").checked)) {
+
+                total += 9.90 * Number(document.getElementById("qt7").value);
+
+            }
+
+            if ((document.getElementById("prt8").checked)) {
+
+                total += 24.90 * Number(document.getElementById("qt8").value);
+
+            }
+
+            if ((document.getElementById("prt9").checked)) {
+
+                total += 329.90 * Number(document.getElementById("qt9").value);
+
+            }
+
+            if ((document.getElementById("prt10").checked)) {
+
+                total += 69.90 * Number(document.getElementById("qt10").value);
+
+            }
+
+            if ((document.getElementById("prt11").checked)) {
+
+                total += 14.90 * Number(document.getElementById("qt11").value);
+
+            }
+
+            if ((document.getElementById("prt12").checked)) {
+
+                total += 6.90 * Number(document.getElementById("qt12").value);
+
+            }
+
+            if ((document.getElementById("aPrazo").checked)) {
+
+                total *= 1.06; 
+                
+                let parcelas = Number(document.getElementById("parcelas").value);
+
+                if (parcelas > 0) {
+                    valorParcela = (total / parcelas) + 6.90;
+                    if (valorParcela < 10) {
+                        resultado.innerHTML = `Não é possível parcelar.`;
+                        return;
+                    }
+                }
+
+            }
+
+            if (document.getElementById("aVista").checked) {
+
+            resultado.innerHTML = `O total é R$ ${(total - (total * 0.085)).toFixed(2)}`;
+            }
+
+            if (document.getElementById("aPrazo").checked) {
+
+                if (valorParcela > 0) {
+                    resultado.innerHTML = `O total é R$ ${total.toFixed(2)} <br> O valor de cada parcela é R$ ${valorParcela.toFixed(2)}`;
+                }
+
+                else {
+                    resultado.innerHTML = `O total é R$ ${total.toFixed(2)} <br> Selecione a quantidade de parcelas.`;
+                }
+
+                
+            }
+        }
+    </script>
+</body>
+</html>

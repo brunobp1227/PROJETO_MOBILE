@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <main>
+        <article class="calculadora">
+            <div id="visor"></div>
+            <button class="caracter" value="1" id="valor">1</button>
+            <button class="caracter" value="2" id="valor">2</button>
+            <button class="caracter" value="3" id="valor">3</button>
+            <button class="caracter" value="4" id="valor">4</button>
+            <button class="caracter" value="5" id="valor">5</button>
+            <button class="caracter" value="6" id="valor">6</button>
+            <button class="caracter" value="7" id="valor">7</button>
+            <button class="caracter" value="8" id="valor">8</button>
+            <button class="caracter" value="9" id="valor">9</button>
+            
+            <button class="caracter" value="*2" id="mult">Dobro</button>
+            <button class="caracter" value="*3" id="mult">Triplo</button>
+            <button class="caracter" value="*4" id="mult">Quadruplo</button>
+            <button class="caracter" value="*5" id="mult">Quintuplo</button>
+            <button class="caracter" value="*6" id="mult">Sêxtuplo</button>
+            
+            <button class="caracter" value="**2" id="poten">Quadrado</button>
+            <button class="caracter" value="**3" id="poten">Cubo</button>
+            <button class="caracter" value="**4" id="poten">Quarta</button>
+            <button class="caracter" value="**5" id="poten">Quinta</button>
+            <button class="caracter" value="**6" id="poten">Sexta</button>
+            
+            <button class="caracter" value="bhaskara" id="bhaskara">Bhaskara</button>
+            <button class="caracter" value="media4" id="media">Média de 4 números</button>
+            <button class="caracter" value="parimpar" id="parImpar">Par / Ímpar</button>
+            
+            <button class="caracter" id="novoNumero">Novo número</button>
+            <button class="caracter enviar" value="=">=</button>
+        </article>
+    </main>
+    <script>
+        let valor = [];
+        let resultado = false;
+        const visor = document.getElementById("visor");
+        
+        const botoesValor = document.querySelectorAll("#valor");
+        const btnBhaskara = document.getElementById("bhaskara");        
+        const btnMedia = document.getElementById("media");        
+        const btnParImpar = document.getElementById("parImpar");
+        const btnMultiplicacao = document.querySelectorAll("#mult");
+        const btnPotencia = document.querySelectorAll("#poten")
+        const novoNumero = document.getElementById("novoNumero");
+        
+        botoesValor.forEach((botao) => {
+            botao.addEventListener("click", function(){
+                    if(resultado){
+                        visor.innerText = botao.value;
+                        resultado = false;
+                        return;
+                    }
+                    visor.innerText += botao.value;
+            })
+        })
+
+        btnBhaskara.addEventListener("click", function(){
+            const visorValue = visor.textContent;
+            let contador = valor.length;
+            if(visorValue){
+                valor[contador] = visorValue;
+                contador++;
+            }
+            if(contador < 3){
+                visor.innerText = "Insira três valores";
+                return;
+            }
+
+
+            let delta = valor[contador - 2] ** 2  * (4 * valor[contador - 3] * valor[contador - 1]);
+
+            let resultado1 = (valor[contador - 2] * -2) + Math.sqrt(delta) / valor[contador - 3] * 2;
+            let resultado2 = (valor[contador - 2] * -2) - Math.sqrt(delta) / valor[contador - 3] * 2;
+
+
+            visor.innerText = `${resultado1.toFixed(2)} ${resultado2.toFixed(2)}`;
+            resultado = true;
+
+        })
+        btnMedia.addEventListener("click", function(){
+            const visorValue = visor.textContent;
+            let contador = valor.length;
+
+            if(visorValue){
+                valor[contador] = visorValue;
+                contador++
+            }
+            if(contador < 4){
+                visor.innerText = "Insira 4 valores";
+                return;
+            }
+            let media = (Number([contador - 4]) + Number([contador - 3]) + Number([contador - 2]) + Number([contador - 1])) / 4;
+
+            visor.innerText = media.toFixed(2);
+        })
+        btnParImpar.addEventListener("click", function(){
+            const visorValue = visor.textContent;
+            let contador = valor.length;
+
+            if(visorValue){
+                valor[contador] = visorValue;
+                contador++;
+            }
+            
+            let parImpar = valor[contador - 1] % 2;
+
+            if(parImpar === 0){
+                visor.innerText = "PAR"
+                return;
+            }
+            else{
+                visor.innerText = "ÍMPAR"
+                return;
+            }
+        })
+        novoNumero.addEventListener("click", function(){
+            let contador = valor.length;
+            let valorAntigo = valor.textContent;
+            if(typeof valorAntigo ==="string"){
+                return;
+            }
+
+            valor[contador] = visor.textContent;
+
+            visor.innerText = "";
+        })
+
+        btnMultiplicacao.forEach((botao) => {
+            botao.addEventListener("click", function(){
+                let contador = valor.length;
+                switch(botao.value){
+                    case "*2":
+                        let valor1 = visor.textContent;
+
+                        let mult1 = valor1 * 2;
+
+                        visor.innerText = mult1;
+                        resultado = true;
+                        break
+                    case "*3":
+                        let valor2 = visor.textContent;
+
+                        let mult2 = valor2 * 3;
+
+                        visor.innerText = mult2;
+                        resultado = true;
+                        break
+                    case "*4":
+                        let valor3 = visor.textContent;
+
+                        let mult3 = valor3 * 4;
+
+                        visor.innerText = mult3;
+                        resultado = true;
+                        break
+                    case "*5":
+                        let valor4 = visor.textContent;
+
+                        let mult4 = valor4 * 5;
+
+                        visor.innerText = mult4;
+                        resultado = true;
+                        break
+                    case "*6":
+                        let valor5 = visor.textContent;
+
+                        let mult5 = valor5 * 6;
+
+                        visor.innerText = mult5;
+                        resultado = true;
+                        break
+                }
+            })
+        })
+
+        btnPotencia.forEach((botao) => {
+            botao.addEventListener("click", function(){
+                let valor = 0;
+                let potencia = 0;
+                switch(botao.value){
+                    case "**2":
+                        valor = visor.textContent;
+
+                        potencia = valor ** 2;
+
+                        visor.innerText = potencia;
+                        break;
+                    case "**3":
+                        valor = visor.textContent;
+
+                        potencia = valor ** 3;
+
+                        visor.innerText = potencia;
+                        break;
+                    case "**4":
+                        valor = visor.textContent;
+
+                        potencia = valor ** 4;
+
+                        visor.innerText = potencia;
+                        break;
+                    case "**5":
+                        valor = visor.textContent;
+
+                        potencia = valor ** 5;
+
+                        visor.innerText = potencia;
+                        break;
+                    case "**6":
+                        valor = visor.textContent;
+
+                        potencia = valor ** 6;
+
+                        visor.innerText = potencia;
+                        break;
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+@charset "UTF-8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculadora{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 450px;
+    margin: 0 auto;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: rgb(66, 65, 65);
+    padding: 20px;
+}
+
+.caracter{
+    height: 70px;
+    width: 70px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 1s;
+}
+.caracter:hover{
+    background-color: yellow;
+}
+#visor{
+    border: 1px solid black;
+    height: 70px;
+    width: 350px;
+    font-size: 3em;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    color: white;
+}

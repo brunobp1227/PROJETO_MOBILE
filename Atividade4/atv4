@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <form method="post" id="forms" onsubmit="envioForm(event)">
+            <div class="left">
+                <h2>Produto:</h2>
+                <div class="form-group">
+                    <input type="checkbox" name="Camisa Regata" id="op1" class="check" data-preco="19.90">
+                    <label for="op1">Camisa Regata</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="Camisa Social" id="op2" class="check" data-preco="59.90">
+                    <label for="op2">Camisa Social</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Blusa" id="op3" class="check" data-preco="119.90">
+                    <label for="op3">Blusa</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Pullover" id="op4" class="check" data-preco="39.90">
+                    <label for="op4">Pullover</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Sapato" id="op5" class="check" data-preco="99.90">
+                    <label for="op5">Sapato</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Calça" id="op6" class="check" data-preco="38.90">
+                    <label for="op6">Calça</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Meias" id="op7" class="check" data-preco="9.90">
+                    <label for="op7">Meias</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Luvas" id="op8" class="check" data-preco="24.90">
+                    <label for="op8">Luvas</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Jaqueta" id="op9" class="check" data-preco="329.90">
+                    <label for="op9">Jaqueta</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Bermuda" id="op10" class="check" data-preco="69.90">
+                    <label for="op10">Bermuda</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Chinelo" id="op11" class="check" data-preco="14.90">
+                    <label for="op11">Chinelo</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" name="Boné" id="op12" class="check" data-preco="6.90">
+                    <label for="op12">Boné</label>
+                </div>
+            </div>
+            <div class="center">
+                <h2>Preço (em R$)</h2>
+                <p class="valor">19.90</p>
+                <p class="valor">59.90</p>
+                <p class="valor">119.90</p>
+                <p class="valor">39.90</p>
+                <p class="valor">99.90</p>
+                <p class="valor">38.90</p>
+                <p class="valor">9.90</p>
+                <p class="valor">24.90</p>
+                <p class="valor">329.90</p>
+                <p class="valor">69.90</p>
+                <p class="valor">14.90</p>
+                <p class="valor">6.90</p>
+            </div>
+            <div class="right">
+                <h2>Quantidade</h2>
+                <input type="number" name="qtd" id="qtd1" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd2" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd3" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd4" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd5" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd6" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd7" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd8" class="qtd" placeholder="1" min="1">
+                
+                <input type="number" name="qtd" id="qtd9" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd10" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd11" class="qtd" placeholder="1" min="1">
+
+                <input type="number" name="qtd" id="qtd12" class="qtd" placeholder="1" min="1">
+            
+
+            </div>
+            <div class="final-section">
+                <h2>Forma de pagamento</h2>
+                <div class="form-group">
+                    <input type="radio" name="pagamento" id="avista" value="vista">
+                    <label for="avista">À vista</label>
+                 </div>
+                <div class="form-group">
+                    <input type="radio" name="pagamento" id="aprazo" value="prazo">
+                    <label for="aprazo">À Prazo</label>
+                </div>
+                <select name="option" id="iopt">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <h3 id="total"></h3>
+                <input type="submit" value="Enviar" class="btn" id="env">
+            </div>
+        </form>
+    </main>
+
+    <script>
+        let produtosTotais = [];
+        let total = 0;
+        let valorAntigo = 0;
+
+        const produtos = document.querySelectorAll('.check');
+        const quantidade = document.querySelectorAll(".qtd");
+
+        function calcularTotal(){
+            total = 0;
+
+            produtos.forEach((produto, index)=>{
+                if(produto.checked){
+                    let preco = Number(produto.dataset.preco);
+                    let qtd = Number(quantidade[index].value) || 0;
+
+                    total += preco * qtd;
+                }
+            });
+
+            document.getElementById("total").innerText = `${total.toFixed(2)} R$`;
+        }
+        produtos.forEach((produto, index) => {
+            produto.addEventListener("change", calcularTotal);
+        })
+        quantidade.forEach((qtd, index) => {
+            qtd.addEventListener("input", calcularTotal);
+        })
+
+        const form = document.getElementById("forms");
+
+        function envioForm(event){
+            event.preventDefault();
+            const pagamento = document.querySelector('input[name="pagamento"]:checked');
+                let forma = pagamento.value;
+                
+                if(forma === "vista"){
+                    let desconto = 8.5/100 * total;
+                    total -= desconto;
+                    document.getElementById("total").innerText = `${total.toFixed(2)}R$`;
+                }
+                else{
+                    const parcelas = document.getElementById("iopt").value;
+                    console.log(parcelas)
+                    let parcelasMensal = 0;
+                    let acrescimo = 0;
+                    switch(parcelas){
+                        case '2':
+                            acrescimo = 6/100 * total;
+                            total += acrescimo + 6.90 * 2;
+                            parcelasMensal = total / 2;
+                            if(parcelasMensal <= 10){
+                                document.getElementById("total").innerText = `Parcela abaixo de 10. Não permitido`;
+                                break;
+                            }
+                            document.getElementById("total").innerText = `Parcela de ${parcelasMensal.toFixed(2)}R$`;
+                            break;
+                            case '3':
+                                acrescimo = 6/100 * total;
+                                total += acrescimo + 6.90 * 3;
+                                parcelasMensal = total / 3;
+                                if(parcelasMensal <= 10){
+                                    document.getElementById("total").innerText = `Parcela abaixo de 10. Não permitido`;
+                                    break;
+                                }
+                                document.getElementById("total").innerText = `Parcela de ${parcelasMensal.toFixed(2)}R$`;
+                                break;
+                            case '4':
+                                acrescimo = 6/100 * total;
+                                total += acrescimo + 6.90 * 4;
+                                parcelasMensal = total / 4;
+                                if(parcelasMensal <= 10){
+                                    document.getElementById("total").innerText = `Parcela abaixo de 10. Não permitido`;
+                                    break;
+                                }
+                                document.getElementById("total").innerText = `Parcela de ${parcelasMensal.toFixed(2)}R$`;
+                                break;
+                            case '5':
+                                acrescimo = 6/100 * total;
+                                total += acrescimo + 6.90 * 5;
+                                parcelasMensal = total / 5;
+                                if(parcelasMensal <= 10){
+                                    document.getElementById("total").innerText = `Parcela abaixo de 10. Não permitido`;
+                                    break;
+                                }
+                                document.getElementById("total").innerText = `Parcela de ${parcelasMensal.toFixed(2)}R$`;
+                                break;
+                    }
+                    
+                }
+            }
+    </script>
+</body>
+</html>
+@charset "UTF-8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+}
+
+form{
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+}
+.left, .center, .right, .final-section{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group{
+    display: flex;
+    gap: 10px;
+}
+.qtd{
+    width: 50px;
+    text-align: center;
+}
+.btn{
+    border-radius: 10px;
+    background-color: rgb(90, 136, 155);
+    color: white;
+    border: none;
+    padding: 10px 8px;
+    cursor: pointer;
+    transition: .4s;
+}
+.btn:hover{
+    scale: 1.05;
+}

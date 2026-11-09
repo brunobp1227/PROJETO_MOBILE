@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Movie Hub",
+    "slug": "movie-hub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/LogoApp.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#101014"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/LogoApp.png",
+        "backgroundColor": "#121212"
+      },
+      "package": "com.tthurzll.moviehub"
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3740e563-9f7d-4dc7-a3c4-f1a9f8c6eac7"
+      }
+    }
+  }
+}
